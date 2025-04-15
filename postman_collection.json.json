@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "7bd734e7-fae6-488e-9e3f-59cf0eb4e354",
+		"name": "API Testing - User Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "44122519",
+		"_collection_link": "https://waliddakir.postman.co/workspace/Walid-DAKIR's-Workspace~1497b4a4-4c82-4d15-8bdf-617732cfbc6c/collection/44122519-7bd734e7-fae6-488e-9e3f-59cf0eb4e354?action=share&source=collection_link&creator=44122519"
+	},
+	"item": [
+		{
+			"name": "Voir tous les users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Statut doit être 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La réponse doit contenir des utilisateurs\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.be.above(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:5000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Créer un utilisateur",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Statut doit être 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"L'utilisateur ajouté doit contenir un ID\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test User\",\r\n  \"email\": \"test@example.com\",\r\n  \"age\": 25\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Mettre à jour un utilisateur",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Statut doit être 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Les informations doivent être mises à jour\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.equal(\"Updated Name\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Updated User\",\r\n  \"email\": \"updated@example.com\",\r\n  \"age\": 26\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:5000/users/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer un utilisateur",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Statut doit être 200 ou 204\", function () {\r",
+							"    pm.response.to.have.status.oneOf([200, 204]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La suppression doit réussir\", function () {\r",
+							"    pm.response.to.be.empty;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:5000/users/3"
+			},
+			"response": []
+		}
+	]
+}

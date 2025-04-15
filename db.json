@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Utilisateur 1",
+      "email": "utilisateur1@example.com",
+      "age": 30
+    },
+    {
+      "name": "Updated User",
+      "email": "updated@example.com",
+      "age": 26,
+      "id": "2"
+    },
+    {
+      "name": "Test 2",
+      "email": "test1@example.com",
+      "age": 25,
+      "id": "a9d9"
+    },
+    {
+      "id": "640b",
+      "name": "Test User",
+      "email": "test@example.com",
+      "age": 25
+    }
+  ]
+}
